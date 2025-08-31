@@ -7,6 +7,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="280"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Name="tbItemToAdd" Margin="15,7,15,7"/>
+            <Button Grid.Column="1" Name="btnAddItem" Content="Add" Width="80" Click="btnAddItem_Click" Margin="5,0,5,0"/>
+            <Button Grid.Column="1" Name="btnRemoveItem" Content="Remove" Click="btnRemoveItem_Click" Margin="90,0,5,0" Width="80"/>
+            <Button Grid.Column="1" Name="btnClearAllItems" Content="Clear" Click="btnClearAllItems_Click" Width="80" Margin="175,0,0,0"/>
+        </Grid>
+        <ListView Grid.Row="1" Name="lvEntries" Margin="15"/>
     </Grid>
 </Window>
