@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic;
 using System.Collections;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,18 +18,26 @@ namespace TodoList
     {
         public MainWindow()
         {
+            DataContext = this;
+            Entries = new ObservableCollection<string>();
             InitializeComponent();
-            lvEntries.Items.Add("Hello");
-            lvEntries.Items.Add("Hello2");
-            lvEntries.Items.Add("Hello3");
-            lvEntries.Items.Add("Hello4");
+            
         }
+
+        private ObservableCollection<string> _entries;
+
+        public ObservableCollection<string> Entries
+        {
+            get { return _entries; }
+            set { _entries = value; }
+        }
+
 
         private void btnAddItem_Click(object sender, RoutedEventArgs e)
         {
             if (tbItemToAdd.Text.Length > 0)
             {
-                lvEntries.Items.Add(tbItemToAdd.Text);
+                Entries.Add(tbItemToAdd.Text);
                 tbItemToAdd.Clear();
             }
         }
@@ -41,7 +50,7 @@ namespace TodoList
                 List<string> itemsListCopy = items.OfType<string>().ToList();
                 foreach (var item in itemsListCopy)
                 {
-                    lvEntries.Items.Remove(item);
+                    Entries.Remove(item);
                 }
             }
         }
@@ -50,8 +59,8 @@ namespace TodoList
             var result = MessageBox.Show($"Delete all items ?", "Confirm action", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                lvEntries.Items.Clear();
-                }
+                Entries.Clear();
+            }
         }
     }
 }

@@ -21,6 +21,6 @@
             <Button Grid.Column="1" Name="btnRemoveItem" Content="Remove" Click="btnRemoveItem_Click" Margin="90,0,5,0" Width="80"/>
             <Button Grid.Column="1" Name="btnClearAllItems" Content="Clear" Click="btnClearAllItems_Click" Width="80" Margin="175,0,0,0"/>
         </Grid>
-        <ListView Grid.Row="1" Name="lvEntries" Margin="15"/>
+        <ListView Grid.Row="1" Name="lvEntries" Margin="15" ItemsSource="{Binding Entries}"/>
     </Grid>
 </Window>
