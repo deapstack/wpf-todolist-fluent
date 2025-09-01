@@ -5,22 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TodoList"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="1024">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="4"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
+        <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Background="Gray" >
+        </GridSplitter>
+        <Rectangle Grid.Row="3" Fill="#091116"/>
+        <TextBox Name="txtInput" Grid.Row="3" AcceptsReturn="True" TextWrapping="Wrap"/>
+        <Rectangle Grid.Row="4" Fill="LightGray"/>
+        <TextBlock Grid.Row="4" Text="Version 1.0.0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Foreground="Black"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="280"/>
             </Grid.ColumnDefinitions>
             <TextBox Name="tbItemToAdd" Margin="15,7,15,7"/>
-            <Button Grid.Column="1" Name="btnAddItem" Content="Add" Width="80" Click="btnAddItem_Click" Margin="5,0,5,0"/>
-            <Button Grid.Column="1" Name="btnRemoveItem" Content="Remove" Click="btnRemoveItem_Click" Margin="90,0,5,0" Width="80"/>
-            <Button Grid.Column="1" Name="btnClearAllItems" Content="Clear" Click="btnClearAllItems_Click" Width="80" Margin="175,0,0,0"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Grid.Column="1" Name="btnAddItem" Content="Add" Click="btnAddItem_Click" Style="{StaticResource ImprovedButton}"/>
+                <Button Grid.Column="1" Name="btnRemoveItem" Content="Remove" Click="btnRemoveItem_Click" Style="{StaticResource ImprovedButton}"/>
+                <Button Grid.Column="1" Name="btnClearAllItems" Content="Clear" Click="btnClearAllItems_Click" Style="{StaticResource ImprovedButton}"/>
+            </StackPanel>
+            
         </Grid>
-        <ListView Grid.Row="1" Name="lvEntries" Margin="15" ItemsSource="{Binding Entries}"/>
+        <Grid Grid.Row="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <ListView Grid.Row="0" Name="lvEntries" Margin="15" ItemsSource="{Binding Entries}"/>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="btnOpenModalWindow" Click="btnOpenModalWindow_Click" Content="Modal" Style="{StaticResource ImprovedButton}"/>
+                <Button Name="btnOpenNormalWindow"  Click="btnOpenNormalWindow_Click" Content="Normal" Style="{StaticResource ImprovedButton}"/>
+            </StackPanel>
+            
+        </Grid>
+        
     </Grid>
 </Window>

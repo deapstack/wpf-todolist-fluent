@@ -1,26 +1,20 @@
-﻿using Microsoft.VisualBasic;
-using System.Collections;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using TodoList.View;
 
 namespace TodoList
 {
     public partial class MainWindow : Window
     {
+
+        static List<object> MQTTClientsList = new List<object>();
+        
         public MainWindow()
         {
             DataContext = this;
             Entries = new ObservableCollection<string>();
             InitializeComponent();
+            
             
         }
 
@@ -32,7 +26,6 @@ namespace TodoList
             set { _entries = value; }
         }
 
-
         private void btnAddItem_Click(object sender, RoutedEventArgs e)
         {
             if (tbItemToAdd.Text.Length > 0)
@@ -40,6 +33,9 @@ namespace TodoList
                 Entries.Add(tbItemToAdd.Text);
                 tbItemToAdd.Clear();
             }
+
+            //MQTTClientsList.
+            
         }
         private void btnRemoveItem_Click(object sender, RoutedEventArgs e)
         {
@@ -61,6 +57,24 @@ namespace TodoList
             {
                 Entries.Clear();
             }
+        }
+
+        private void btnOpenModalWindow_Click(object sender, RoutedEventArgs e)
+        {
+            ModalWindow modalWindow = new ModalWindow(this);
+            Opacity = 0.4;
+            modalWindow.ShowDialog();
+            Opacity = 1.0;
+            if (modalWindow.Success == true)
+            {
+                txtInput.Text = modalWindow.Input;
+            }
+        }
+        
+        private void btnOpenNormalWindow_Click(Object sender, RoutedEventArgs e)
+        {
+            NormalWindow normalWindow = new NormalWindow();
+            normalWindow.Show();
         }
     }
 }
